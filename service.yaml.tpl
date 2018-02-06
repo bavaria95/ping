@@ -3,8 +3,8 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    service: $$NAME$$
-  name: $$NAME$$
+    service: @@NAME@@
+  name: @@NAME@@
 spec:
   clusterIP: None
   ports:
@@ -12,6 +12,6 @@ spec:
     port: 55555
     targetPort: 0
   selector:
-    service: $$NAME$$
+    service: @@NAME@@
 status:
   loadBalancer: {}
