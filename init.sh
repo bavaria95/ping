@@ -7,3 +7,10 @@ for node in "${minion_nodes[@]}"; do
 done
 
 rm service.yaml.tpl
+
+
+for node in "${minion_nodes[@]}"; do
+    sed -e "s/$$NAME$$/$node/g" deployment.yaml.tpl > "$node-deployment.yaml"
+done
+
+rm deployment.yaml.tpl
