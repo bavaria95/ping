@@ -13,9 +13,9 @@ spec:
       - image: tutum/curl
         name: $$NAME$$
         args:
-          - bash
-          - -c
-          - while true; do sleep 10; done
+        - bash
+        - -c
+        - while true; do sleep 10; done
       restartPolicy: Always
       nodeSelector:
         kubernetes.io/hostname: $$NAME$$
