@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: @@NAME@@
+  name: @@NAME@@-job
 spec:
   template:
     metadata:
-      name: @@NAME@@
+      name: @@NAME@@-job
     spec:
       containers:
       - command: ["/bin/bash"]
@@ -13,4 +13,4 @@ spec:
                         echo $nodes"
                 ]
         image: tutum/curl
-        name: @@NAME@@
+        name: @@NAME@@-job
