@@ -14,3 +14,4 @@ spec:
                 ]
         image: tutum/curl
         name: @@NAME@@-job
+      restartPolicy: Never
