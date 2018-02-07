@@ -1,8 +1,11 @@
 #!/bin/bash
 
-minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
+rm -rf configs
 
 mkdir configs
+
+
+minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
 mkdir configs/services
 for node in ${minion_nodes[@]}; do
