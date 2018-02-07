@@ -21,3 +21,4 @@ spec:
             ]
     image: tutum/curl
     name: @@NAME@@-pod
+  restartPolicy: Never
