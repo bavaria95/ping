@@ -14,3 +14,12 @@ for node in ${minion_nodes[@]}; do
 done
 
 rm deployment.yaml.tpl
+
+
+sed -i -e "s/@@NODES@@/(${minion_nodes[*]})/g" job.yaml.tpl
+
+for node in ${minion_nodes[@]}; do
+    sed -e "s/@@NAME@@/$node/g" job.yaml.tpl > "$node-job.yaml"
+done
+
+rm job.yaml.tpl
