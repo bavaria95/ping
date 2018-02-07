@@ -2,24 +2,21 @@
 
 minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
+mkdir configs
+
+mkdir configs/services
 for node in ${minion_nodes[@]}; do
-    sed -e "s/@@NAME@@/$node/g" service.yaml.tpl > "$node-service.yaml"
+    sed -e "s/@@NAME@@/$node/g" service.yaml.tpl > "configs/services/$node-service.yaml"
 done
 
-rm service.yaml.tpl
-
-
+mkdir configs/deployments
 for node in ${minion_nodes[@]}; do
-    sed -e "s/@@NAME@@/$node/g" deployment.yaml.tpl > "$node-deployment.yaml"
+    sed -e "s/@@NAME@@/$node/g" deployment.yaml.tpl > "configs/deployments/$node-deployment.yaml"
 done
 
-rm deployment.yaml.tpl
-
-
+mkdir configs/pods
 sed -i -e "s/@@NODES@@/(${minion_nodes[*]})/g" pod.yaml.tpl
 
 for node in ${minion_nodes[@]}; do
-    sed -e "s/@@NAME@@/$node/g" pod.yaml.tpl > "$node-pod.yaml"
+    sed -e "s/@@NAME@@/$node/g" pod.yaml.tpl > "configs/pods/$node-pod.yaml"
 done
-
-rm pod.yaml.tpl
