@@ -16,10 +16,10 @@ done
 rm deployment.yaml.tpl
 
 
-sed -i -e "s/@@NODES@@/(${minion_nodes[*]})/g" job.yaml.tpl
+sed -i -e "s/@@NODES@@/(${minion_nodes[*]})/g" pod.yaml.tpl
 
 for node in ${minion_nodes[@]}; do
-    sed -e "s/@@NAME@@/$node/g" job.yaml.tpl > "$node-job.yaml"
+    sed -e "s/@@NAME@@/$node/g" pod.yaml.tpl > "$node-pod.yaml"
 done
 
-rm job.yaml.tpl
+rm pod.yaml.tpl
