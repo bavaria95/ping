@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: @@NAME@@
+  name: @@NAME@@-d
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        service: @@NAME@@
+        service: @@NAME@@-service
     spec:
       containers:
       - image: tutum/curl
-        name: @@NAME@@
+        name: @@NAME@@-d
         args:
         - bash
         - -c
