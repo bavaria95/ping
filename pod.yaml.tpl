@@ -9,7 +9,7 @@ spec:
                     host=@@NAME@@ && 
                     FAILED=0 && 
                     for node in ${minion_nodes[@]}; do \
-                      ping -c 1 \"$node-service\" 2>&1 >/dev/null; \
+                      ping -c 1 \"$node-service\" > /dev/null 2>&1; \
                       if [ $? -ne 0 ]; then \
                         echo \"$host cannot connect to $node\"; \
                         FAILED=1; \
