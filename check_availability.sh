@@ -3,6 +3,7 @@
 KUBECTL=(
     /var/lib/jenkins/kubectl
     --kubeconfig=$K8S_CONFIG
+    --namespace="ping-$BUILD_ID"
 )
 
 pod_exit_code() {

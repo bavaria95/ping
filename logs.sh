@@ -3,6 +3,7 @@
 KUBECTL=(
     /var/lib/jenkins/kubectl
     --kubeconfig=$K8S_CONFIG
+    --namespace="ping-$BUILD_ID"
 )
 
 minion_nodes=($("${KUBECTL[@]}" get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
