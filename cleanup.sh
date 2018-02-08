@@ -17,4 +17,6 @@ KUBECTL=(
 
 "${KUBECTL[@]}" delete namespace "ping-$BUILD_ID"
 
+rm -rf ping
+
 exit 0
