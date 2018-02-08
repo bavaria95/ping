@@ -1,11 +1,16 @@
 #!/bin/bash
 
-kubectl apply -f configs/services
+KUBECTL=(
+    /var/lib/jenkins/kubectl
+    --kubeconfig=$K8S_CONFIG
+)
+
+"${KUBECTL[@]}" apply -f configs/services
 
 sleep 2
 
-kubectl apply -f configs/deployments
+"${KUBECTL[@]}" apply -f configs/deployments
 
 sleep 2
 
-kubectl apply -f configs/pods
+"${KUBECTL[@]}" apply -f configs/pods

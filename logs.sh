@@ -1,8 +1,13 @@
 #!/bin/bash
 
-minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
+KUBECTL=(
+    /var/lib/jenkins/kubectl
+    --kubeconfig=$K8S_CONFIG
+)
+
+minion_nodes=($("${KUBECTL[@]}" get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
 for node in ${minion_nodes[@]}; do
-    OUTPUT=$(kubectl logs ${node-pod})
+    OUTPUT=$("${KUBECTL[@]}" logs ${node-pod})
     echo $OUTPUT
 done

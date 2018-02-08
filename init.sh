@@ -4,8 +4,16 @@ rm -rf configs
 
 mkdir configs
 
+sed -i -e "s|ca.pem|${K8S_CA}|g" "$K8S_CONFIG"
+sed -i -e "s|cert.pem|${K8S_CERT}|g" "$K8S_CONFIG"
+sed -i -e "s|key.pem|${K8S_KEY}|g" "$K8S_CONFIG"
 
-minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
+KUBECTL=(
+    /var/lib/jenkins/kubectl
+    --kubeconfig=$K8S_CONFIG
+)
+
+minion_nodes=($("${KUBECTL[@]}" get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
 mkdir configs/services
 for node in ${minion_nodes[@]}; do

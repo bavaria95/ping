@@ -1,7 +1,12 @@
 #!/bin/bash +e
 
-kubectl delete -f configs/pods
-kubectl delete -f configs/deployments
-kubectl delete -f configs/services
+KUBECTL=(
+    /var/lib/jenkins/kubectl
+    --kubeconfig=$K8S_CONFIG
+)
+
+"${KUBECTL[@]}" delete -f configs/pods
+"${KUBECTL[@]}" delete -f configs/deployments
+"${KUBECTL[@]}" delete -f configs/services
 
 exit 0

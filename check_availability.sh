@@ -1,8 +1,13 @@
 #!/bin/bash
 
+KUBECTL=(
+    /var/lib/jenkins/kubectl
+    --kubeconfig=$K8S_CONFIG
+)
+
 pod_exit_code() {
     local terminated_jsonpath='{.status.containerStatuses[0].state.terminated.exitCode}'
-    kubectl \
+    "${KUBECTL[@]}" \
         get \
             pod \
             $1 \
@@ -11,7 +16,7 @@ pod_exit_code() {
 }
 
 
-minion_nodes=($(kubectl get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
+minion_nodes=($("${KUBECTL[@]}" get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
 
 for (( i=1; i<=60; i++ )); do
