@@ -9,6 +9,6 @@ KUBECTL=(
 minion_nodes=($("${KUBECTL[@]}" get nodes | tail -n +2 | grep -v 'master' | awk '{ print $1 }'))
 
 for node in ${minion_nodes[@]}; do
-    OUTPUT=$("${KUBECTL[@]}" logs ${node-pod})
+    OUTPUT=$("${KUBECTL[@]}" logs ${node}-pod)
     echo $OUTPUT
 done
