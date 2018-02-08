@@ -32,9 +32,10 @@ node ('master') {
                 if (pingStatus != 0) {
                     currentBuild.result = 'FAILURE'
                     stage('Logs') {
-                        sh '''
+                        def output = sh returnStdout: true, script: '''
                             ./logs.sh
                         '''
+                    mail body: output, subject: "Kubernetes is on fire", to: "inspire-admin-ci@cern.ch"
                     error "Ping phase failed"
                     sleep 2
                     }
